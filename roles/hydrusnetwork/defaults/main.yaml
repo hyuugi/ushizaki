@@ -1,0 +1,3 @@
+---
+git_repository_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/hydrus_network"
+git_repository_version: "v503"

@@ -1,0 +1,11 @@
+---
+- name: Install required packages
+  ansible.builtin.dnf:
+    name: git
+    state: present
+
+- name: Acquire Hydrus Network source code
+  ansible.builtin.git:
+    repo: https://github.com/hydrusnetwork/hydrus.git
+    dest: "{{ git_repository_directory }}"
+    version: "{{ git_repository_version }}"

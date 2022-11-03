@@ -1,0 +1,78 @@
+---
+name: Tests
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - dev
+      - molecule
+
+defaults:
+  run:
+    working-directory: hyuugi/ushizaki
+
+jobs:
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+        with:
+          path: hyuugi/ushizaki
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install test dependencies.
+        run: pip3 install yamllint
+
+      - name: Lint code.
+        run: |
+          yamllint .
+
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+#          - distro: debian11
+#            playbook: converge.yml
+          - distro: fedora36
+            playbook: converge.yml
+          - distro: fedora35
+            playbook: converge.yml
+#          - distro: ubuntu2204
+#            playbook: converge.yml
+#          - distro: ubuntu2004
+#            playbook: converge.yml
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+        with:
+          path: hyuugi/ushizaki
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install test dependencies.
+        run: pip3 install ansible molecule[docker] docker
+
+      - name: Install Collection
+        run: ansible-galaxy collection install "git+https://github.com/hyuugi/ushizaki.git,${{ github.ref_name }}"
+
+      - name: Run Molecule tests.
+        run: molecule test
+        env:
+          PY_COLORS: 1
+          ANSIBLE_FORCE_COLOR: 1
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+          MOLECULE_PLAYBOOK: ${{ matrix.playbook }}
