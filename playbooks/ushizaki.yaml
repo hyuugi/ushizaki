@@ -1,0 +1,7 @@
+---
+- name: Ushizaki - Deploy the Hydrus Network
+  hosts: localhost
+  tasks:
+    - name: Import hydrusnetwork role
+      ansible.builtin.import_role:
+        name: hyuugi.ushizaki.hydrusnetwork
