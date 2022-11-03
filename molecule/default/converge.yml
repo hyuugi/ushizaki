@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Include hydrusnetwork
+      ansible.builtin.import_role:
+        name: hyuugi.ushizaki.hydrusnetwork
