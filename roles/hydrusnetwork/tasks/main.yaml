@@ -1,13 +1,19 @@
 ---
-- name: Install required packages
+- name: Install required packages (RedHat)
+  become: true
   ansible.builtin.dnf:
-    name: git
+    name:
+      - git
+      - python3.9
     state: present
   when: ansible_facts["os_family"] == "RedHat"
 
-- name: Install required packages
+- name: Install required packages (Debian)
+  become: true
   ansible.builtin.apt:
-    name: git
+    name:
+      - git
+      - python3-venv
     state: present
     update_cache: true
   when: ansible_facts["os_family"] == "Debian"
