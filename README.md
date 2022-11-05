@@ -8,6 +8,8 @@ This Ansible collection's goal is to ease the installation, configuration, updat
 
 ## Installation
 
+Currently tested on Debian 11 and Fedora 36.
+
 Python 3 and Ansible are requirements. See [the Python website](https://wiki.python.org/moin/BeginnersGuide/Download) for an introduction to installing Python if it is not already present on your system.
 
 To setup Ansible as a regular user:
