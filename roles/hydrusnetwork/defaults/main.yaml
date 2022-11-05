@@ -1,5 +1,5 @@
 ---
 git_repository_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/hydrus_network"
-git_repository_version: "v503"
+git_repository_version: "master"
 virtual_environment_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/venv/hydrus_network_venv"
 virtual_environment_command: "python3.9 -m venv"
