@@ -41,3 +41,17 @@
     virtualenv: "{{ virtual_environment_directory }}"
     virtualenv_command: "{{ virtual_environment_command }}"
     extra_args: --upgrade
+
+- name: Install Hydrus requirements via pip
+  ansible.builtin.pip:
+    requirements: "{{ git_repository_directory }}/requirements.txt"
+    virtualenv: "{{ virtual_environment_directory }}"
+
+- name: Install the Hydrus requirements mentioned in the documentation via pip
+  ansible.builtin.pip:
+    name:
+      - PyQt6
+      - PyQt6-Charts
+      - qtpy
+    virtualenv: "{{ virtual_environment_directory }}"
+    extra_args: --upgrade
