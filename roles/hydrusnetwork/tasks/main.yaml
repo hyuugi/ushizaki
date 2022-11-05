@@ -25,3 +25,19 @@
     repo: https://github.com/hydrusnetwork/hydrus.git
     dest: "{{ git_repository_directory }}"
     version: "{{ git_repository_version }}"
+
+- name: Update pip within Hydrus Network venv
+  ansible.builtin.pip:
+    name:
+      - pip
+    virtualenv: "{{ virtual_environment_directory }}"
+    virtualenv_command: "{{ virtual_environment_command }}"
+    extra_args: --upgrade
+
+- name: Update wheel within Hydrus Network venv
+  ansible.builtin.pip:
+    name:
+      - wheel
+    virtualenv: "{{ virtual_environment_directory }}"
+    virtualenv_command: "{{ virtual_environment_command }}"
+    extra_args: --upgrade
