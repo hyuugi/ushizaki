@@ -1,13 +1,21 @@
 ---
-- name: Install required packages
+- name: Install required packages (RedHat)
+  become: true
   ansible.builtin.dnf:
-    name: git
+    name:
+      - ffmpeg-free
+      - git
+      - python3.9
     state: present
   when: ansible_facts["os_family"] == "RedHat"
 
-- name: Install required packages
+- name: Install required packages (Debian)
+  become: true
   ansible.builtin.apt:
-    name: git
+    name:
+      - ffmpeg
+      - git
+      - python3-venv
     state: present
     update_cache: true
   when: ansible_facts["os_family"] == "Debian"
@@ -17,3 +25,33 @@
     repo: https://github.com/hydrusnetwork/hydrus.git
     dest: "{{ git_repository_directory }}"
     version: "{{ git_repository_version }}"
+
+- name: Update pip within Hydrus Network venv
+  ansible.builtin.pip:
+    name:
+      - pip
+    virtualenv: "{{ virtual_environment_directory }}"
+    virtualenv_command: "{{ virtual_environment_command }}"
+    extra_args: --upgrade
+
+- name: Update wheel within Hydrus Network venv
+  ansible.builtin.pip:
+    name:
+      - wheel
+    virtualenv: "{{ virtual_environment_directory }}"
+    virtualenv_command: "{{ virtual_environment_command }}"
+    extra_args: --upgrade
+
+- name: Install Hydrus requirements via pip
+  ansible.builtin.pip:
+    requirements: "{{ git_repository_directory }}/requirements.txt"
+    virtualenv: "{{ virtual_environment_directory }}"
+
+- name: Install the Hydrus requirements mentioned in the documentation via pip
+  ansible.builtin.pip:
+    name:
+      - PyQt6
+      - PyQt6-Charts
+      - qtpy
+    virtualenv: "{{ virtual_environment_directory }}"
+    extra_args: --upgrade

@@ -8,7 +8,24 @@ This Ansible collection's goal is to ease the installation, configuration, updat
 
 ## Installation
 
-As a regular user:
+Currently tested on Debian 11 and Fedora 36.
+
+Python 3 and Ansible are requirements. See [the Python website](https://wiki.python.org/moin/BeginnersGuide/Download) for an introduction to installing Python if it is not already present on your system.
+
+To setup Ansible as a regular user:
+
+``` sh
+# Setup a virtual environment
+python3 -m venv venv
+# Activate the virtual environment
+source venv/bin/activate
+# Update the installation tools
+python3 -m pip install --upgrade pip
+# Install Ansible
+python3 -m pip install --upgrade ansible
+```
+
+To setup Hydrus:
 
 ``` sh
 # Import the Ansible collection

@@ -45,12 +45,6 @@ jobs:
             playbook: converge.yml
           - distro: fedora36
             playbook: converge.yml
-          - distro: fedora35
-            playbook: converge.yml
-          - distro: ubuntu2204
-            playbook: converge.yml
-          - distro: ubuntu2004
-            playbook: converge.yml
 
     steps:
       - name: Check out the codebase.
