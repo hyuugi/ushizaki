@@ -5,3 +5,7 @@
     - name: Import hydrusnetwork role
       ansible.builtin.import_role:
         name: hyuugi.ushizaki.hydrusnetwork
+
+    - name: Import hydownloader role
+      ansible.builtin.import_role:
+        name: hyuugi.ushizaki.hydownloader

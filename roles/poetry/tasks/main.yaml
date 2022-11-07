@@ -1,0 +1,41 @@
+---
+- name: Install required packages (RedHat)
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - python3.9
+    state: present
+  when: ansible_facts["os_family"] == "RedHat"
+
+- name: Install required packages (Debian)
+  become: true
+  ansible.builtin.apt:
+    name:
+      - python3-venv
+    state: present
+    update_cache: true
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Update pip within poetry venv
+  ansible.builtin.pip:
+    name:
+      - pip
+    virtualenv: "{{ hyuugi_ushizaki_poetry_virtual_environment_directory }}"
+    virtualenv_command: "{{ hyuugi_ushizaki_poetry_virtual_environment_command }}"
+    extra_args: --upgrade
+
+- name: Update setuptools within poetry venv
+  ansible.builtin.pip:
+    name:
+      - setuptools
+    virtualenv: "{{ hyuugi_ushizaki_poetry_virtual_environment_directory }}"
+    virtualenv_command: "{{ hyuugi_ushizaki_poetry_virtual_environment_command }}"
+    extra_args: --upgrade
+
+- name: Install poetry
+  ansible.builtin.pip:
+    name:
+      - poetry
+    virtualenv: "{{ hyuugi_ushizaki_poetry_virtual_environment_directory }}"
+    virtualenv_command: "{{ hyuugi_ushizaki_poetry_virtual_environment_command }}"
+    extra_args: --upgrade

@@ -5,3 +5,11 @@
     - name: Include hydrusnetwork
       ansible.builtin.import_role:
         name: hyuugi.ushizaki.hydrusnetwork
+
+    - name: Include poetry
+      ansible.builtin.import_role:
+        name: hyuugi.ushizaki.poetry
+
+    - name: Include hydownloader
+      ansible.builtin.import_role:
+        name: hyuugi.ushizaki.hydownloader
