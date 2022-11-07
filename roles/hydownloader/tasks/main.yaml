@@ -1,0 +1,48 @@
+---
+- name: Install required packages (RedHat)
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - ffmpeg-free
+      - git
+      - python3.9
+    state: present
+  when: ansible_facts["os_family"] == "RedHat"
+
+- name: Install required packages (Debian)
+  become: true
+  ansible.builtin.apt:
+    name:
+      - ffmpeg
+      - git
+      - python3-venv
+    state: present
+    update_cache: true
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: Acquire hydownloader source code
+  ansible.builtin.git:
+    repo: https://github.com/thatfuckingbird/hydownloader.git
+    dest: "{{ hyuugi_ushizaki_hydownloader_git_repository_directory }}"
+    version: "{{ hyuugi_ushizaki_hydownloader_git_repository_version }}"
+
+- name: Import poetry role
+  ansible.builtin.import_role:
+    name: hyuugi.ushizaki.poetry
+
+# The .venv directory is created within the project git repository to make poetry
+# use that directory rather than others. See:
+# https://python-poetry.org/docs/configuration/#virtualenvsin-project
+- name: Create .venv within hydownloader directory
+  ansible.builtin.pip:
+    name: pip
+    virtualenv: "{{ hyuugi_ushizaki_hydownloader_virtual_environment_directory }}"
+    virtualenv_command: "{{ hyuugi_ushizaki_hydownloader_virtual_environment_command }}"
+    extra_args: --upgrade
+
+- name: Install hydownloader requirements
+  ansible.builtin.command:
+    cmd: "{{ hyuugi_ushizaki_poetry_virtual_environment_directory }}/bin/poetry install"
+    chdir: "{{ hyuugi_ushizaki_hydownloader_git_repository_directory }}"
+  register: poetry_result
+  changed_when: not poetry_result.stdout.find("No dependencies to install or update")
