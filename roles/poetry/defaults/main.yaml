@@ -1,0 +1,3 @@
+---
+hyuugi_ushizaki_poetry_virtual_environment_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/venv/poetry_venv"
+hyuugi_ushizaki_poetry_virtual_environment_command: "python3.9 -m venv"
