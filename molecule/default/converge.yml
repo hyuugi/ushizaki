@@ -9,3 +9,7 @@
     - name: Include poetry
       ansible.builtin.import_role:
         name: hyuugi.ushizaki.poetry
+
+    - name: Include hydownloader
+      ansible.builtin.import_role:
+        name: hyuugi.ushizaki.hydownloader
