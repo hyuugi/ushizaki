@@ -22,7 +22,7 @@
 
 - name: Acquire hydownloader source code
   ansible.builtin.git:
-    repo: https://github.com/thatfuckingbird/hydownloader.git
+    repo: https://gitgud.io/thatfuckingbird/hydownloader.git
     dest: "{{ hyuugi_ushizaki_hydownloader_git_repository_directory }}"
     version: "{{ hyuugi_ushizaki_hydownloader_git_repository_version }}"
 
