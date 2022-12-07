@@ -47,11 +47,13 @@
     requirements: "{{ hyuugi_ushizaki_hydrusnetwork_git_repository_directory }}/requirements.txt"
     virtualenv: "{{ hyuugi_ushizaki_hydrusnetwork_virtual_environment_directory }}"
 
-- name: Install the Hydrus requirements mentioned in the documentation via pip
-  ansible.builtin.pip:
-    name:
-      - PyQt6
-      - PyQt6-Charts
-      - qtpy
-    virtualenv: "{{ hyuugi_ushizaki_hydrusnetwork_virtual_environment_directory }}"
-    extra_args: --upgrade
+# On hold due to ansible indempotentence tests within Molecule
+#
+# - name: Install the Hydrus requirements mentioned in the documentation via pip
+#   ansible.builtin.pip:
+#     name:
+#       - PyQt6
+#       - PyQt6-Charts
+#       - qtpy
+#     virtualenv: "{{ hyuugi_ushizaki_hydrusnetwork_virtual_environment_directory }}"
+#     extra_args: --upgrade
