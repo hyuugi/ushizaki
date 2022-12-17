@@ -42,7 +42,12 @@
 
 - name: Install hydownloader requirements
   ansible.builtin.command:
-    cmd: "{{ hyuugi_ushizaki_poetry_virtual_environment_directory }}/bin/poetry install"
-    chdir: "{{ hyuugi_ushizaki_hydownloader_git_repository_directory }}"
+    cmd: "{{ hyuugi_ushizaki_poetry_virtual_environment_directory | quote }}/bin/poetry install"
+    chdir: "{{ hyuugi_ushizaki_hydownloader_git_repository_directory | quote }}"
   register: poetry_result
   changed_when: not poetry_result.stdout.find("No dependencies to install or update")
+
+- name: Hydownloader Init Database
+  ansible.builtin.command:
+    cmd: "{{ hyuugi_ushizaki_poetry_virtual_environment_directory | quote }}/bin/poetry run hydownloader-tools init-db --path {{ hyuugi_ushizaki_hydownloader_database_directory | quote }}"
+    chdir: "{{ hyuugi_ushizaki_hydownloader_git_repository_directory | quote }}"

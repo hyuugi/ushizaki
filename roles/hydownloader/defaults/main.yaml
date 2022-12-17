@@ -1,5 +1,6 @@
 ---
-hyuugi_ushizaki_hydownloader_git_repository_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/hydownloader"
+hyuugi_ushizaki_hydownloader_git_repository_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/software/hydownloader"
 hyuugi_ushizaki_hydownloader_git_repository_version: "0.27.0"
 hyuugi_ushizaki_hydownloader_virtual_environment_directory: "{{ hyuugi_ushizaki_hydownloader_git_repository_directory }}/.venv"
 hyuugi_ushizaki_hydownloader_virtual_environment_command: "python3.9 -m venv"
+hyuugi_ushizaki_hydownloader_database_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/data/hydownloader"

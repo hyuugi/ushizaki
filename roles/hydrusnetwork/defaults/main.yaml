@@ -1,5 +1,6 @@
 ---
-hyuugi_ushizaki_hydrusnetwork_git_repository_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/hydrus_network"
-hyuugi_ushizaki_hydrusnetwork_git_repository_version: "master"
+hyuugi_ushizaki_hydrusnetwork_git_repository_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/software/hydrus_network"
+# "develop" is the branch signed locally by hydrusdev
+hyuugi_ushizaki_hydrusnetwork_git_repository_version: "develop"
 hyuugi_ushizaki_hydrusnetwork_virtual_environment_directory: "{{ lookup('ansible.builtin.env', 'PWD') }}/venv/hydrus_network_venv"
 hyuugi_ushizaki_hydrusnetwork_virtual_environment_command: "python3.9 -m venv"
