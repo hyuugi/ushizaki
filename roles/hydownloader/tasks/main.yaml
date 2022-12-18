@@ -51,3 +51,4 @@
   ansible.builtin.command:
     cmd: "{{ hyuugi_ushizaki_poetry_virtual_environment_directory | quote }}/bin/poetry run hydownloader-tools init-db --path {{ hyuugi_ushizaki_hydownloader_database_directory | quote }}"
     chdir: "{{ hyuugi_ushizaki_hydownloader_git_repository_directory | quote }}"
+    creates: "{{ hyuugi_ushizaki_hydownloader_database_directory | quote }}/hydownloader.db"
