@@ -24,6 +24,12 @@ Options:
 # Debian GNU/Linux packages
 HYDRUS_NETWORK_PACKAGES="ffmpeg git libsqlite3-dev python3 python3-venv"
 
+BASE_INSTALL_DIR="./install_directory"
+
+HYDRUS_NETWORK_REPOSITORY="https://github.com/hydrusnetwork/hydrus.git"
+HYDRUS_NETWORK_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_network/"
+HYDRUS_NETWORK_VENV="${BASE_INSTALL_DIR}/venv_hydrus_network/"
+
 verbosity_level=0
 VERBOSE_NORMAL=0
 
@@ -65,4 +71,14 @@ packages_are_installed () {
 	fi
 }
 
+setup_venv () {
+	python3 -m venv "${1}"
+	"${1}/bin/python" -m pip install -U pip
+	"${1}/bin/python" -m pip install -U wheel setuptools
+}
+
 packages_are_installed "${HYDRUS_NETWORK_PACKAGES}"
+git clone "${HYDRUS_NETWORK_REPOSITORY}" "${HYDRUS_NETWORK_INSTALL_DIR}"
+setup_venv "${HYDRUS_NETWORK_VENV}"
+"${HYDRUS_NETWORK_VENV}/bin/python" -m pip install -r "${HYDRUS_NETWORK_INSTALL_DIR}"/requirements.txt
+
