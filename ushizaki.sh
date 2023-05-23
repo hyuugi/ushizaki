@@ -41,3 +41,28 @@ do
 	esac
 done
 
+packages_are_installed () {
+	packages_missing=0
+
+	for p in $1
+	do
+		if dpkg-query -W | grep -q "^${p}"
+		then
+			if [ "${verbosity_level}" -gt "${VERBOSE_NORMAL}" ]
+			then
+				printf '%s\n' "Package is installed: ${p}"
+			fi
+		else
+			printf '%s\n' "Missing package: ${p}"
+			packages_missing=$((packages_missing + 1))
+		fi
+	done
+
+	if [ "${packages_missing}" -ne 0 ]
+	then
+		printf '%s\n' "Number of missing packages: ${packages_missing}"
+		exit 1
+	fi
+}
+
+packages_are_installed "${HYDRUS_NETWORK_PACKAGES}"
