@@ -1,0 +1,29 @@
+name: Oni~on
+
+on:
+  push:
+    branches: [ "master", "actions" ]
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run shellcheck
+        run: shellcheck -o all -s dash ushizaki.sh
+
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: sudo apt-get -y install cmake ffmpeg g++ git libgl1-mesa-dev libsqlite3-dev make python3 python3-venv qt6-base-dev
+
+      - name: Run ushizaki.sh
+        run: dash ushizaki.sh
