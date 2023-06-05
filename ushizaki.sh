@@ -23,6 +23,7 @@ Options:
 
 # Debian GNU/Linux packages
 HYDRUS_NETWORK_PACKAGES="ffmpeg git libsqlite3-dev python3 python3-venv"
+POETRY_PACKAGES="python3 python3-venv"
 
 BASE_INSTALL_DIR="./install_directory"
 
@@ -30,6 +31,7 @@ HYDRUS_NETWORK_REPOSITORY="https://github.com/hydrusnetwork/hydrus.git"
 HYDRUS_NETWORK_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_network/"
 HYDRUS_NETWORK_VENV="${BASE_INSTALL_DIR}/venv_hydrus_network/"
 
+POETRY_VENV="${BASE_INSTALL_DIR}/venv_poetry/"
 verbosity_level=0
 VERBOSE_NORMAL=0
 
@@ -81,4 +83,9 @@ packages_are_installed "${HYDRUS_NETWORK_PACKAGES}"
 git clone "${HYDRUS_NETWORK_REPOSITORY}" "${HYDRUS_NETWORK_INSTALL_DIR}"
 setup_venv "${HYDRUS_NETWORK_VENV}"
 "${HYDRUS_NETWORK_VENV}/bin/python" -m pip install -r "${HYDRUS_NETWORK_INSTALL_DIR}"/requirements.txt
+
+
+packages_are_installed "${POETRY_PACKAGES}"
+setup_venv "${POETRY_VENV}"
+"${POETRY_VENV}/bin/python" -m pip install poetry
 
