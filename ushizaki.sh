@@ -25,6 +25,7 @@ Options:
 HYDRUS_NETWORK_PACKAGES="ffmpeg git libsqlite3-dev python3 python3-venv"
 POETRY_PACKAGES="python3 python3-venv"
 HYDOWNLOADER_PACKAGES="ffmpeg git python3 python3-venv"
+HYDOWNLOADER_SYSTRAY_PACKAGES="cmake git g++ make qt6-base-dev"
 
 BASE_INSTALL_DIR="./install_directory"
 
@@ -38,6 +39,10 @@ HYDOWNLOADER_REPOSITORY="https://gitgud.io/thatfuckingbird/hydownloader.git"
 HYDOWNLOADER_INSTALL_DIR="${BASE_INSTALL_DIR}/hydownloader/"
 # This is where poetry expects a local venv to be.
 HYDOWNLOADER_VENV="${HYDOWNLOADER_INSTALL_DIR}/.venv"
+
+HYDOWNLOADER_SYSTRAY_REPOSITORY="https://gitgud.io/thatfuckingbird/hydownloader-systray.git"
+HYDOWNLOADER_SYSTRAY_INSTALL_DIR="${BASE_INSTALL_DIR}/hydownloader_systray"
+HYDOWNLOADER_SYSTRAY_BUILD_DIR="${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}/build"
 
 verbosity_level=0
 VERBOSE_NORMAL=0
@@ -101,4 +106,12 @@ packages_are_installed "${HYDOWNLOADER_PACKAGES}"
 git clone "${HYDOWNLOADER_REPOSITORY}" "${HYDOWNLOADER_INSTALL_DIR}"
 setup_venv "${HYDOWNLOADER_VENV}"
 "${POETRY_VENV}/bin/poetry" -C "${HYDOWNLOADER_INSTALL_DIR}" install
+
+
+packages_are_installed "${HYDOWNLOADER_SYSTRAY_PACKAGES}"
+git clone "${HYDOWNLOADER_SYSTRAY_REPOSITORY}" "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}"
+git -C "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}" submodule update --init
+mkdir "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}"
+cmake -S "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}" -B "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}"
+make -C "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}"
 
