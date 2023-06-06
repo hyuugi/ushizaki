@@ -18,15 +18,7 @@ USAGE="Usage: $(basename "$0") [OPTIONS]
 Deploy the Hydrus Network and supporting programs.
 
 Options:
-  -h   Print usage
-  -v   Verbose output"
-
-# Debian GNU/Linux packages
-HYDRUS_NETWORK_PACKAGES="ffmpeg git libsqlite3-dev python3 python3-venv"
-POETRY_PACKAGES="python3 python3-venv"
-HYDOWNLOADER_PACKAGES="ffmpeg git python3 python3-venv"
-HYDOWNLOADER_SYSTRAY_PACKAGES="cmake git g++ make qt6-base-dev"
-HYDRUS_COMPANION_PACKAGES="firefox-esr git"
+  -h   Print usage"
 
 BASE_INSTALL_DIR="./install_directory"
 
@@ -48,19 +40,15 @@ HYDOWNLOADER_SYSTRAY_BUILD_DIR="${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}/build"
 HYDRUS_COMPANION_REPOSITORY="https://gitgud.io/prkc/hydrus-companion.git"
 HYDRUS_COMPANION_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_companion"
 
-verbosity_level=0
-VERBOSE_NORMAL=0
-
 display_usage () {
 	printf '%s\n' "${USAGE}"
 	exit "$1"
 }
 
-while getopts hv arg
+while getopts h arg
 do
 	case ${arg} in
 		h)  display_usage 0;;
-		v)  verbosity_level=$((verbosity_level + 1));;
 		*)  display_usage 1;;
 	esac
 done
