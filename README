@@ -1,0 +1,20 @@
+Ushizaki installs the Hydrus Network and a selection of supporting
+programs.
+
+Run with:
+dash ushizaki.sh
+
+At this point, you still have to setup the connections between
+programs.  For example, you need to activate the Hydrus Network client
+API and share the hydownloader API key between hydrus-companion and
+the hydownloader-systray.
+
+Suggested Debian GNU/Linux dependencies include:
+General dependencies:
+git python3 python3-venv
+Suggested by the Hydrus Network:
+ffmpeg libsqlite3-dev
+To compile hydownloader-systray:
+cmake g++ make qt6-base-dev
+Unsigned extensions are allowed with:
+firefox-esr
