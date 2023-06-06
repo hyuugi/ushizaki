@@ -87,7 +87,7 @@ setup_venv "${HYDRUS_NETWORK_VENV}"
 
 
 setup_venv "${POETRY_VENV}"
-"${POETRY_VENV}/bin/python" -m pip install poetry
+"${POETRY_VENV}/bin/python" -m pip install -U poetry
 
 
 git_clone_or_fetch "${HYDOWNLOADER_REPOSITORY}" "${HYDOWNLOADER_INSTALL_DIR}" "${HYDOWNLOADER_VERSION}"
