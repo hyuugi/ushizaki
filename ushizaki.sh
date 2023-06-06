@@ -65,54 +65,26 @@ do
 	esac
 done
 
-packages_are_installed () {
-	packages_missing=0
-
-	for p in $1
-	do
-		if dpkg-query -W | grep -q "^${p}"
-		then
-			if [ "${verbosity_level}" -gt "${VERBOSE_NORMAL}" ]
-			then
-				printf '%s\n' "Package is installed: ${p}"
-			fi
-		else
-			printf '%s\n' "Missing package: ${p}"
-			packages_missing=$((packages_missing + 1))
-		fi
-	done
-
-	if [ "${packages_missing}" -ne 0 ]
-	then
-		printf '%s\n' "Number of missing packages: ${packages_missing}"
-		exit 1
-	fi
-}
-
 setup_venv () {
 	python3 -m venv "${1}"
 	"${1}/bin/python" -m pip install -U pip
 	"${1}/bin/python" -m pip install -U wheel setuptools
 }
 
-packages_are_installed "${HYDRUS_NETWORK_PACKAGES}"
 git clone "${HYDRUS_NETWORK_REPOSITORY}" "${HYDRUS_NETWORK_INSTALL_DIR}"
 setup_venv "${HYDRUS_NETWORK_VENV}"
 "${HYDRUS_NETWORK_VENV}/bin/python" -m pip install -r "${HYDRUS_NETWORK_INSTALL_DIR}"/requirements.txt
 
 
-packages_are_installed "${POETRY_PACKAGES}"
 setup_venv "${POETRY_VENV}"
 "${POETRY_VENV}/bin/python" -m pip install poetry
 
 
-packages_are_installed "${HYDOWNLOADER_PACKAGES}"
 git clone "${HYDOWNLOADER_REPOSITORY}" "${HYDOWNLOADER_INSTALL_DIR}"
 setup_venv "${HYDOWNLOADER_VENV}"
 "${POETRY_VENV}/bin/poetry" -C "${HYDOWNLOADER_INSTALL_DIR}" install
 
 
-packages_are_installed "${HYDOWNLOADER_SYSTRAY_PACKAGES}"
 git clone "${HYDOWNLOADER_SYSTRAY_REPOSITORY}" "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}"
 git -C "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}" submodule update --init
 mkdir "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}"
@@ -120,5 +92,4 @@ cmake -S "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}" -B "${HYDOWNLOADER_SYSTRAY_BUILD_
 make -C "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}"
 
 
-packages_are_installed "${HYDRUS_COMPANION_PACKAGES}"
 git clone "${HYDRUS_COMPANION_REPOSITORY}" "${HYDRUS_COMPANION_INSTALL_DIR}"
