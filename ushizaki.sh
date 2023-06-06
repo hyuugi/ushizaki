@@ -20,6 +20,12 @@ Deploy the Hydrus Network and supporting programs.
 Options:
   -h   Print usage"
 
+# Software versions to install
+HYDRUS_NETWORK_VERSION="v530"
+HYDOWNLOADER_VERSION="fb4a22fce928497786487b2da27a35b4ef1f6f55"
+HYDOWNLOADER_SYSTRAY_VERSION="f0f638c4ee0ff9597d1aa5e494c94a58d6ba5a0d"
+HYDRUS_COMPANION_VERSION="7cafd0ae5fc4da62ebb7ed72e90ced03d27b0927"
+
 BASE_INSTALL_DIR="./install_directory"
 
 HYDRUS_NETWORK_REPOSITORY="https://github.com/hydrusnetwork/hydrus.git"
@@ -53,13 +59,29 @@ do
 	esac
 done
 
+# Clone a repository if it does not exist, otherwise git fetch.
+# Then checkout a pinned commit. Detached HEAD is the norm.
+# $1 - Repository URL
+# $2 - Local directory
+# $3 - Commit to checkout
+git_clone_or_fetch () {
+	if [ -d "${2}/.git" ]
+	then
+		git -C "${2}" fetch --all
+	else
+		git clone "${1}" "${2}"
+	fi
+
+	git -C "${2}" checkout "${3}"
+}
+
 setup_venv () {
 	python3 -m venv "${1}"
 	"${1}/bin/python" -m pip install -U pip
 	"${1}/bin/python" -m pip install -U wheel setuptools
 }
 
-git clone "${HYDRUS_NETWORK_REPOSITORY}" "${HYDRUS_NETWORK_INSTALL_DIR}"
+git_clone_or_fetch "${HYDRUS_NETWORK_REPOSITORY}" "${HYDRUS_NETWORK_INSTALL_DIR}" "${HYDRUS_NETWORK_VERSION}"
 setup_venv "${HYDRUS_NETWORK_VENV}"
 "${HYDRUS_NETWORK_VENV}/bin/python" -m pip install -r "${HYDRUS_NETWORK_INSTALL_DIR}"/requirements.txt
 
@@ -68,16 +90,16 @@ setup_venv "${POETRY_VENV}"
 "${POETRY_VENV}/bin/python" -m pip install poetry
 
 
-git clone "${HYDOWNLOADER_REPOSITORY}" "${HYDOWNLOADER_INSTALL_DIR}"
+git_clone_or_fetch "${HYDOWNLOADER_REPOSITORY}" "${HYDOWNLOADER_INSTALL_DIR}" "${HYDOWNLOADER_VERSION}"
 setup_venv "${HYDOWNLOADER_VENV}"
 "${POETRY_VENV}/bin/poetry" -C "${HYDOWNLOADER_INSTALL_DIR}" install
 
 
-git clone "${HYDOWNLOADER_SYSTRAY_REPOSITORY}" "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}"
+git_clone_or_fetch "${HYDOWNLOADER_SYSTRAY_REPOSITORY}" "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}" "${HYDOWNLOADER_SYSTRAY_VERSION}"
 git -C "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}" submodule update --init
 mkdir "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}"
 cmake -S "${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}" -B "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}"
 make -C "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}"
 
 
-git clone "${HYDRUS_COMPANION_REPOSITORY}" "${HYDRUS_COMPANION_INSTALL_DIR}"
+git_clone_or_fetch "${HYDRUS_COMPANION_REPOSITORY}" "${HYDRUS_COMPANION_INSTALL_DIR}" "${HYDRUS_COMPANION_VERSION}"
