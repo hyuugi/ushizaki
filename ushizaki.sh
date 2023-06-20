@@ -92,6 +92,12 @@ setup_venv () {
 	"${1}/bin/python" -m pip install -U wheel setuptools
 }
 
+# Given two paths, get a path that is relative between them
+# $1 - The first path
+# $2 - The second path
+get_relative_path () {
+	realpath -m -s --relative-to "${1}" "${2}"
+}
 git_clone_or_fetch "${HYDRUS_NETWORK_REPOSITORY}" "${HYDRUS_NETWORK_INSTALL_DIR}" "${HYDRUS_NETWORK_VERSION}"
 setup_venv "${HYDRUS_NETWORK_VENV}"
 "${HYDRUS_NETWORK_VENV}/bin/python" -m pip install -r "${HYDRUS_NETWORK_INSTALL_DIR}"/requirements.txt
