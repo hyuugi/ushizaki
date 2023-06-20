@@ -52,6 +52,9 @@ HYDOWNLOADER_SYSTRAY_BUILD_DIR="${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}/build/"
 HYDRUS_COMPANION_REPOSITORY="https://gitgud.io/prkc/hydrus-companion.git"
 HYDRUS_COMPANION_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_companion/"
 
+IGNITION_SCRIPT_LOCATION="${BASE_SCRIPT_DIR}/ignition.sh"
+TERMINAL_EMULATOR_COMMAND="xterm -e"
+
 display_usage () {
 	printf '%s\n' "${USAGE}"
 	exit "$1"
