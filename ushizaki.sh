@@ -40,7 +40,10 @@ POETRY_VENV="${BASE_INSTALL_DIR}/venv_poetry/"
 HYDOWNLOADER_REPOSITORY="https://gitgud.io/thatfuckingbird/hydownloader.git"
 HYDOWNLOADER_INSTALL_DIR="${BASE_INSTALL_DIR}/hydownloader/"
 # This is where poetry expects a local venv to be.
-HYDOWNLOADER_VENV="${HYDOWNLOADER_INSTALL_DIR}/.venv"
+HYDOWNLOADER_VENV="${HYDOWNLOADER_INSTALL_DIR}/.venv/"
+HYDOWNLOADER_DATABASE="${BASE_DATABASE_DIR}/hydownloader_database/"
+# A list can be found with "poetry run hydownloader-tools test --help"
+HYDOWNLOADER_TEST_SITES="environment"
 
 HYDOWNLOADER_SYSTRAY_REPOSITORY="https://gitgud.io/thatfuckingbird/hydownloader-systray.git"
 HYDOWNLOADER_SYSTRAY_INSTALL_DIR="${BASE_INSTALL_DIR}/hydownloader_systray"
