@@ -47,10 +47,10 @@ HYDOWNLOADER_TEST_SITES="environment"
 
 HYDOWNLOADER_SYSTRAY_REPOSITORY="https://gitgud.io/thatfuckingbird/hydownloader-systray.git"
 HYDOWNLOADER_SYSTRAY_INSTALL_DIR="${BASE_INSTALL_DIR}/hydownloader_systray"
-HYDOWNLOADER_SYSTRAY_BUILD_DIR="${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}/build"
+HYDOWNLOADER_SYSTRAY_BUILD_DIR="${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}/build/"
 
 HYDRUS_COMPANION_REPOSITORY="https://gitgud.io/prkc/hydrus-companion.git"
-HYDRUS_COMPANION_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_companion"
+HYDRUS_COMPANION_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_companion/"
 
 display_usage () {
 	printf '%s\n' "${USAGE}"
