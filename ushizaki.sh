@@ -104,6 +104,7 @@ create_ignition_script () {
 	local IGNITION_SCRIPT_PATH
 	IGNITION_SCRIPT_PATH="$(dirname "${IGNITION_SCRIPT_LOCATION}")"
 	mkdir -p "${IGNITION_SCRIPT_PATH}"
+	# shellcheck disable=SC2312
 	cat > "${IGNITION_SCRIPT_LOCATION}" << EOF
 ${TERMINAL_EMULATOR_COMMAND} "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDRUS_NETWORK_VENV}/bin/python")" "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDRUS_NETWORK_INSTALL_DIR}/hydrus_client.py")" -d "$(get_relative_path "${HYDRUS_NETWORK_INSTALL_DIR}" "${HYDRUS_NETWORK_DATABASE}")" &
 "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${POETRY_VENV}/bin/poetry")" -C "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDOWNLOADER_INSTALL_DIR}")" run hydownloader-tools test --path "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDOWNLOADER_DATABASE}")" --sites "${HYDOWNLOADER_TEST_SITES}"
