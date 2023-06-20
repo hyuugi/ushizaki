@@ -84,6 +84,8 @@ git_clone_or_fetch () {
 	git -C "${2}" checkout "${3}"
 }
 
+# Create venv and update Python utilities
+# $1 - Location of the venv
 setup_venv () {
 	python3 -m venv "${1}"
 	"${1}/bin/python" -m pip install -U pip
