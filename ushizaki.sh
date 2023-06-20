@@ -33,6 +33,7 @@ BASE_SCRIPT_DIR="./"
 HYDRUS_NETWORK_REPOSITORY="https://github.com/hydrusnetwork/hydrus.git"
 HYDRUS_NETWORK_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_network/"
 HYDRUS_NETWORK_VENV="${BASE_INSTALL_DIR}/venv_hydrus_network/"
+HYDRUS_NETWORK_DATABASE="${BASE_DATABASE_DIR}/hydrus_network_database/"
 
 POETRY_VENV="${BASE_INSTALL_DIR}/venv_poetry/"
 
