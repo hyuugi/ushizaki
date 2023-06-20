@@ -98,6 +98,20 @@ setup_venv () {
 get_relative_path () {
 	realpath -m -s --relative-to "${1}" "${2}"
 }
+
+# Create a script to run the programs
+create_ignition_script () {
+	local IGNITION_SCRIPT_PATH
+	IGNITION_SCRIPT_PATH="$(dirname "${IGNITION_SCRIPT_LOCATION}")"
+	mkdir -p "${IGNITION_SCRIPT_PATH}"
+	cat > "${IGNITION_SCRIPT_LOCATION}" << EOF
+${TERMINAL_EMULATOR_COMMAND} "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDRUS_NETWORK_VENV}/bin/python")" "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDRUS_NETWORK_INSTALL_DIR}/hydrus_client.py")" -d "$(get_relative_path "${HYDRUS_NETWORK_INSTALL_DIR}" "${HYDRUS_NETWORK_DATABASE}")" &
+"$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${POETRY_VENV}/bin/poetry")" -C "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDOWNLOADER_INSTALL_DIR}")" run hydownloader-tools test --path "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDOWNLOADER_DATABASE}")" --sites "${HYDOWNLOADER_TEST_SITES}"
+${TERMINAL_EMULATOR_COMMAND} "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${POETRY_VENV}/bin/poetry")" -C "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDOWNLOADER_INSTALL_DIR}")" run hydownloader-daemon start --path "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDOWNLOADER_DATABASE}")" &
+${TERMINAL_EMULATOR_COMMAND} "$(get_relative_path "${IGNITION_SCRIPT_PATH}" "${HYDOWNLOADER_SYSTRAY_BUILD_DIR}/hydownloader-systray")"
+EOF
+}
+
 git_clone_or_fetch "${HYDRUS_NETWORK_REPOSITORY}" "${HYDRUS_NETWORK_INSTALL_DIR}" "${HYDRUS_NETWORK_VERSION}"
 setup_venv "${HYDRUS_NETWORK_VENV}"
 "${HYDRUS_NETWORK_VENV}/bin/python" -m pip install -r "${HYDRUS_NETWORK_INSTALL_DIR}"/requirements.txt
