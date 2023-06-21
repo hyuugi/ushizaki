@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Run shellcheck
-        run: shellcheck -o all -s dash ushizaki.sh
+        run: shellcheck -x -o all -s dash ushizaki.sh
 
   run:
     runs-on: ubuntu-latest
