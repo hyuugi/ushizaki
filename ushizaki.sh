@@ -20,39 +20,48 @@ Deploy the Hydrus Network and supporting programs.
 Options:
   -h   Print usage"
 
-# Software versions to install
+# Software versions to install. 'git checkout' will receive this value.
 HYDRUS_NETWORK_VERSION="v530"
 HYDOWNLOADER_VERSION="fb4a22fce928497786487b2da27a35b4ef1f6f55"
 HYDOWNLOADER_SYSTRAY_VERSION="f0f638c4ee0ff9597d1aa5e494c94a58d6ba5a0d"
 HYDRUS_COMPANION_VERSION="7cafd0ae5fc4da62ebb7ed72e90ced03d27b0927"
 
+# Convenience variables. Used to define subsequent variables.
 BASE_INSTALL_DIR="./installations/"
 BASE_DATABASE_DIR="./databases/"
 BASE_SCRIPT_DIR="./"
 
+# Hydrus Network variables.
 HYDRUS_NETWORK_REPOSITORY="https://github.com/hydrusnetwork/hydrus.git"
 HYDRUS_NETWORK_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_network/"
 HYDRUS_NETWORK_VENV="${BASE_INSTALL_DIR}/venv_hydrus_network/"
 HYDRUS_NETWORK_DATABASE="${BASE_DATABASE_DIR}/hydrus_network_database/"
 
+# Python poetry is installed into this venv.
 POETRY_VENV="${BASE_INSTALL_DIR}/venv_poetry/"
 
+# Hydownloader variables.
 HYDOWNLOADER_REPOSITORY="https://gitgud.io/thatfuckingbird/hydownloader.git"
 HYDOWNLOADER_INSTALL_DIR="${BASE_INSTALL_DIR}/hydownloader/"
-# This is where poetry expects a local venv to be.
+# This is where poetry expects a local venv to be. Leave this variable alone.
+# https://python-poetry.org/docs/configuration/#virtualenvsin-project
 HYDOWNLOADER_VENV="${HYDOWNLOADER_INSTALL_DIR}/.venv/"
 HYDOWNLOADER_DATABASE="${BASE_DATABASE_DIR}/hydownloader_database/"
-# A list can be found with "poetry run hydownloader-tools test --help"
-HYDOWNLOADER_TEST_SITES="environment"
+# A list of tests can be found with "hydownloader-tools test --help"
+HYDOWNLOADER_TEST_SITES="environment" # Comma-separated
 
+# Hydownloader-systray variables.
 HYDOWNLOADER_SYSTRAY_REPOSITORY="https://gitgud.io/thatfuckingbird/hydownloader-systray.git"
 HYDOWNLOADER_SYSTRAY_INSTALL_DIR="${BASE_INSTALL_DIR}/hydownloader_systray"
 HYDOWNLOADER_SYSTRAY_BUILD_DIR="${HYDOWNLOADER_SYSTRAY_INSTALL_DIR}/build/"
 
+# Hydrus companion variables.
 HYDRUS_COMPANION_REPOSITORY="https://gitgud.io/prkc/hydrus-companion.git"
 HYDRUS_COMPANION_INSTALL_DIR="${BASE_INSTALL_DIR}/hydrus_companion/"
 
+# Script to start these programs.
 IGNITION_SCRIPT_LOCATION="${BASE_SCRIPT_DIR}/ignition.sh"
+# Ignition.sh spawns new terminals.
 TERMINAL_EMULATOR_COMMAND="xterm -e"
 
 display_usage () {
