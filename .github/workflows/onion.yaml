@@ -30,3 +30,6 @@ jobs:
 
       - name: Run ushizaki.sh
         run: dash ushizaki.sh
+
+      - name: Run ushizaki.sh with configuration
+        run: dash ushizaki.sh -c ./example_configuration.sh
