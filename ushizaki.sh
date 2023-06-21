@@ -18,7 +18,8 @@ USAGE="Usage: $(basename "$0") [OPTIONS]
 Deploy the Hydrus Network and supporting programs.
 
 Options:
-  -h   Print usage"
+  -h          Print usage
+  -c SCRIPT   Execute a shell script to configure the environment"
 
 # Software versions to install. 'git checkout' will receive this value.
 HYDRUS_NETWORK_VERSION="v530"
@@ -69,13 +70,20 @@ display_usage () {
 	exit "$1"
 }
 
-while getopts h arg
+while getopts hc: arg
 do
 	case ${arg} in
 		h)  display_usage 0;;
+		c)  USHIZAKI_CONFIGURATION_LOCATION="${OPTARG}";;
 		*)  display_usage 1;;
 	esac
 done
+
+if [ -n "${USHIZAKI_CONFIGURATION_LOCATION}" ]
+then
+	# shellcheck source=./example_configuration.sh
+	. "${USHIZAKI_CONFIGURATION_LOCATION}"
+fi
 
 # Clone a repository if it does not exist, otherwise git fetch.
 # Then checkout a pinned commit. Detached HEAD is the norm.
