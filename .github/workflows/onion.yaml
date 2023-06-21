@@ -25,5 +25,8 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get -y install cmake ffmpeg g++ git libgl1-mesa-dev libsqlite3-dev make python3 python3-venv qt6-base-dev
 
+      - name: Run ushizaki.sh help
+        run: dash ushizaki.sh -h
+
       - name: Run ushizaki.sh
         run: dash ushizaki.sh
