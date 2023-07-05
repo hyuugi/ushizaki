@@ -22,8 +22,8 @@ Options:
   -c SCRIPT   Execute a shell script to configure the environment"
 
 # Software versions to install. 'git checkout' will receive this value.
-HYDRUS_NETWORK_VERSION="v530"
-HYDOWNLOADER_VERSION="fb4a22fce928497786487b2da27a35b4ef1f6f55"
+HYDRUS_NETWORK_VERSION="v533"
+HYDOWNLOADER_VERSION="c5551d428a04cc6a6b5c41cb2087114c5f9005f2"
 HYDOWNLOADER_SYSTRAY_VERSION="f0f638c4ee0ff9597d1aa5e494c94a58d6ba5a0d"
 HYDRUS_COMPANION_VERSION="7cafd0ae5fc4da62ebb7ed72e90ced03d27b0927"
 
