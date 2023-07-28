@@ -24,7 +24,7 @@ Options:
 # Software versions to install. 'git checkout' will receive this value.
 HYDRUS_NETWORK_VERSION="v535"
 HYDOWNLOADER_VERSION="6ad5b73c0cd6789530c54e39920910b24091eba9"
-HYDOWNLOADER_SYSTRAY_VERSION="f0f638c4ee0ff9597d1aa5e494c94a58d6ba5a0d"
+HYDOWNLOADER_SYSTRAY_VERSION="361a044d003b4c2bd221c17bad2f6dec3eac1daa"
 HYDRUS_COMPANION_VERSION="fdfae9540320766bf9119e6d347ec5739d6ac578"
 
 # Convenience variables. Used to define subsequent variables.
