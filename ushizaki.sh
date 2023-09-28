@@ -22,10 +22,10 @@ Options:
   -c SCRIPT   Execute a shell script to configure the environment"
 
 # Software versions to install. 'git checkout' will receive this value.
-HYDRUS_NETWORK_VERSION="v535"
-HYDOWNLOADER_VERSION="6ad5b73c0cd6789530c54e39920910b24091eba9"
-HYDOWNLOADER_SYSTRAY_VERSION="361a044d003b4c2bd221c17bad2f6dec3eac1daa"
-HYDRUS_COMPANION_VERSION="fdfae9540320766bf9119e6d347ec5739d6ac578"
+HYDRUS_NETWORK_VERSION="origin/master"
+HYDOWNLOADER_VERSION="origin/master"
+HYDOWNLOADER_SYSTRAY_VERSION="origin/master"
+HYDRUS_COMPANION_VERSION="origin/master"
 
 # Convenience variables. Used to define subsequent variables.
 BASE_INSTALL_DIR="./installations/"
